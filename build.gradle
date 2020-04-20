@@ -1,0 +1,18 @@
+group = "HostChanger "
+
+apply plugin: 'java'
+apply plugin:'application'
+
+mainClassName = 'com.hc.HostChanger'
+sourceCompatibility = 1.8
+version = '1.0'
+
+jar {
+    manifest {
+        attributes  'Title': 'HostChanger', 'Version': version, 'Main-Class': mainClassName
+    }
+    dependsOn configurations.runtime
+    from {
+        configurations.compile.collect {it.isDirectory()? it: zipTree(it)}
+    }
+}
